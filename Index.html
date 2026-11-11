@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avishka Herath | Mechanical Engineering Portfolio</title>
+    
+    <!-- Google Fonts: Outfit (Headings), Plus Jakarta Sans (Body), JetBrains Mono (Technical Metadata) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        surface: '#F8FAFC',
+                        stage: '#F1F5F9',
+                        charcoal: '#0F172A',
+                        graphite: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #0F172A;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Subtle Swiss architectural dot matrix for carousel image stages */
+        .stage-grid {
+            background-color: #F1F5F9;
+            background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+
+        /* Dark technical grid for high-contrast feature blocks */
+        .dark-stage-grid {
+            background-color: #0F172A;
+            background-image: radial-gradient(#334155 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Editorial Card Styling */
+        .editorial-card {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .editorial-card:hover {
+            border-color: #CBD5E1;
+            box-shadow: 0 12px 30px -10px rgba(15, 23, 42, 0.06);
+        }
+
+        .zoomable-img {
+            cursor: zoom-in;
+            transition: transform 0.25s ease;
+        }
+        .zoomable-img:hover {
+            transform: scale(1.015);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-slate-900 selection:text-white">
+
+    <!-- FIXED NON-OVERLAPPING TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between gap-4">
+            
+            <!-- Left: Brand Identity -->
+            <a href="#" class="flex items-center gap-3 shrink-0 min-w-0">
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-900 shrink-0"></span>
+                <span class="font-display font-bold text-slate-900 tracking-tight text-base sm:text-lg whitespace-nowrap">
+                    AVISHKA HERATH
+                </span>
+                <span class="hidden sm:inline-block font-mono text-[11px] font-medium text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded whitespace-nowrap">
+                    MECH ENG
+                </span>
+            </a>
+
+            <!-- Center/Right Desktop Navigation Links (Never overlaps) -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#approach" class="hover:text-slate-900 transition-colors whitespace-nowrap">Approach</a>
+                <a href="#projects" class="hover:text-slate-900 transition-colors whitespace-nowrap">Projects</a>
+                <a href="#industrial-visit" class="hover:text-slate-900 transition-colors whitespace-nowrap">Industrial Visit</a>
+                <a href="#leadership" class="hover:text-slate-900 transition-colors whitespace-nowrap">Leadership</a>
+                <a href="#credentials" class="hover:text-slate-900 transition-colors whitespace-nowrap">Credentials</a>
+            </nav>
+
+            <!-- Right: CV Action & Mobile Hamburger -->
+            <div class="flex items-center gap-3 shrink-0">
+                <a href="CV.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-mono text-xs font-medium px-4 py-2.5 rounded-lg transition-colors whitespace-nowrap shadow-xs">
+                    <i class="fa-regular fa-file-pdf"></i>
+                    <span>Download CV</span>
+                </a>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" type="button" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 focus:outline-none" aria-label="Toggle Navigation">
+                    <i id="mobile-menu-icon" class="fa-solid fa-bars text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Responsive Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-6 py-4 space-y-3 shadow-lg">
+            <a href="#approach" class="mobile-nav-link block py-2 text-sm font-medium text-slate-700 hover:text-slate-900 border-b border-slate-100">01 / My Approach</a>
+            <a href="#projects" class="mobile-nav-link block py-2 text-sm font-medium text-slate-700 hover:text-slate-900 border-b border-slate-100">02 / Engineering Projects</a>
+            <a href="#industrial-visit" class="mobile-nav-link block py-2 text-sm font-medium text-slate-700 hover:text-slate-900 border-b border-slate-100">03 / Industrial Visit</a>
+            <a href="#leadership" class="mobile-nav-link block py-2 text-sm font-medium text-slate-700 hover:text-slate-900 border-b border-slate-100">04 / Leadership &amp; Volunteering</a>
+            <a href="#credentials" class="mobile-nav-link block py-2 text-sm font-medium text-slate-700 hover:text-slate-900">05 / Education, Skills &amp; Credentials</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-20 md:space-y-24">
+
+        <!-- 1. HERO SECTION (12-Column Asymmetric Split) -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            <!-- Left Column (8 Cols): Bio & Contact Actions -->
+            <div class="lg:col-span-8 min-w-0 space-y-6">
+                <div class="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-slate-700 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-md">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-900"></span>
+                    MECHANICAL ENGINEERING UNDERGRADUATE
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-[1.1]">
+                    Avishka Herath
+                </h1>
+
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-3xl">
+                    A Mechanical Engineering undergraduate at the University of Moratuwa with academic project experience in mechanical design, CAD, and manufacturing engineering. Interested in practical product development, automation, and modern manufacturing. Seeking an industrial placement opportunity where I can contribute to real mechanical engineering work while developing strong industry-ready design and problem-solving skills.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center gap-3 pt-2">
+                    <a href="CV.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-slate-900 hover:bg-slate-800 text-white font-display text-sm font-semibold px-5 py-3 rounded-lg transition-all shadow-xs">
+                        <i class="fa-solid fa-file-arrow-down"></i>
+                        <span>Download CV</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/avishka-herath-6a85b7386/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white hover:bg-slate-50 text-slate-900 font-display text-sm font-semibold px-5 py-3 rounded-lg border border-slate-300 transition-all">
+                        <i class="fa-brands fa-linkedin text-slate-800 text-base"></i>
+                        <span>LinkedIn Profile</span>
+                    </a>
+                </div>
+
+                <!-- Contact Info Pills (No overlap, clean flex-wrap) -->
+                <div class="pt-4 border-t border-slate-200 flex flex-wrap items-center gap-3 font-mono text-xs text-slate-600">
+                    <a href="mailto:avishka.madhuwantha25@gmail.com" class="inline-flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3 py-2 rounded-md transition-colors break-all sm:break-normal">
+                        <i class="fa-regular fa-envelope text-slate-900 shrink-0"></i>
+                        <span>avishka.madhuwantha25@gmail.com</span>
+                    </a>
+                    <a href="tel:+94740989493" class="inline-flex items-center gap-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3 py-2 rounded-md transition-colors whitespace-nowrap">
+                        <i class="fa-solid fa-phone text-slate-900 shrink-0"></i>
+                        <span>+94 74 098 9493</span>
+                    </a>
+                    <div class="inline-flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-2 rounded-md whitespace-nowrap">
+                        <i class="fa-solid fa-location-dot text-slate-900 shrink-0"></i>
+                        <span>Katubedda, Moratuwa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column (4 Cols): Framed Portrait Card -->
+            <div class="lg:col-span-4 flex justify-center lg:justify-end">
+                <div class="w-full max-w-[320px] editorial-card rounded-2xl p-4 shadow-xs">
+                    <div class="aspect-[4/5] w-full rounded-xl overflow-hidden bg-slate-200 border border-slate-200">
+                        <img src="image_66dfe6.png" alt="Avishka Herath" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="mt-3.5 pt-3 border-t border-slate-200/80 flex items-center justify-between gap-2">
+                        <span class="font-mono text-[11px] font-medium text-slate-700 truncate">University of Moratuwa</span>
+                        <span class="font-mono text-[11px] font-semibold text-slate-900 bg-slate-200/80 px-2 py-0.5 rounded shrink-0">BSc Eng (Hons)</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 2. SECTION 01 — MY APPROACH -->
+        <section id="approach" class="scroll-mt-24 pt-12 border-t border-slate-200">
+            <div class="editorial-card rounded-2xl p-6 sm:p-8 md:p-10 border-l-4 border-l-slate-900">
+                <div class="max-w-4xl space-y-4">
+                    <div class="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-slate-500">
+                        <span>01 / MY APPROACH</span>
+                    </div>
+                    <h2 class="font-display text-2xl sm:text-3xl font-bold text-slate-900 leading-snug">
+                        "Bridging imagination and realization—translating conceptual ideas into practical application through an engineering eye, driven by curiosity and determination to solve problems and build new things."
+                    </h2>
+                </div>
+
+                <!-- 3-Column Structured Philosophy Breakdown -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8 pt-8 border-t border-slate-200">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <span class="font-mono text-xs font-semibold text-slate-400 block mb-2">01. CONCEPT TO CAD</span>
+                            <h3 class="font-display text-lg font-bold text-slate-900 mb-2">Imagination to Realization</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Turning theoretical mechanical concepts into functional 3D CAD assemblies and validated physical designs.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <span class="font-mono text-xs font-semibold text-slate-400 block mb-2">02. ENGINEERING EYE</span>
+                            <h3 class="font-display text-lg font-bold text-slate-900 mb-2">Practical Application</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Viewing challenges through an engineering lens to optimize manufacturability, efficiency, and real-world performance.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                        <div>
+                            <span class="font-mono text-xs font-semibold text-slate-400 block mb-2">03. CORE DRIVE</span>
+                            <h3 class="font-display text-lg font-bold text-slate-900 mb-2">Curiosity &amp; Determination</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Persistently exploring analytical methods, simulations, and hands-on iterations to engineer reliable solutions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SECTION 02 — ENGINEERING PROJECTS -->
+        <section id="projects" class="scroll-mt-24 pt-12 border-t border-slate-200 space-y-10">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <span class="font-mono text-xs font-semibold uppercase tracking-widest text-slate-500 block mb-2">02 / SELECTED WORK</span>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">Engineering Projects</h2>
+                </div>
+                <p class="font-mono text-xs text-slate-500 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-md w-fit">
+                    <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-slate-700"></i>Click any slide to inspect full screen
+                </p>
+            </div>
+
+            <!-- Project List (Split 12-Col Cards: 5 Cols Info, 7 Cols Carousel) -->
+            <div class="space-y-8">
+
+                <!-- Project 1: Machine Design - Compost Grinding Machine -->
+                <article class="editorial-card rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+                    <!-- Left 5 Cols: Project Details -->
+                    <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200 min-w-0">
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-2.5 py-1 rounded">
+                                    Group Project
+                                </span>
+                                <span class="font-mono text-xs font-medium text-slate-500">
+                                    July 2026 - Present
+                                </span>
+                            </div>
+                            <h3 class="font-display text-2xl font-bold text-slate-900 leading-snug">
+                                Machine Design - Compost Grinding Machine
+                            </h3>
+                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                                Working within a team to develop a gearbox-driven compost grinding machine using three forward speeds and one reverse speed to accommodate different torque and speed requirements under varying grinding loads.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-6 border-t border-slate-200/80 flex flex-wrap gap-2">
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">Solid Edge</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">Mechanical Design</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">Gearbox Assembly</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">CAD</span>
+                        </div>
+                    </div>
+
+                    <!-- Right 7 Cols: Interactive Carousel -->
+                    <div class="lg:col-span-7 stage-grid p-4 sm:p-6 flex items-center justify-center min-w-0">
+                        <div class="carousel relative w-full rounded-xl bg-white border border-slate-200 overflow-hidden shadow-2xs select-none" data-carousel>
+                            <div class="carousel-track flex transition-transform duration-300 ease-out" data-carousel-track>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="Screenshot 2026-11-11 000224.png" alt="Machine Design - Compost Grinding Machine (External Gearbox Assembly)" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="Screenshot 2026-11-11 000305.png" alt="Machine Design - Compost Grinding Machine (Internal Gearbox Isometric View)" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="Screenshot 2026-11-11 000321.png" alt="Machine Design - Compost Grinding Machine (Internal Gearbox Top View)" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="Screenshot 2026-11-11 000348.png" alt="Machine Design - Compost Grinding Machine (Layshaft CAD Model)" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                            </div>
+
+                            <!-- Controls -->
+                            <button type="button" data-carousel-prev class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-md flex items-center justify-center transition-all" aria-label="Previous slide">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button type="button" data-carousel-next class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-md flex items-center justify-center transition-all" aria-label="Next slide">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+
+                            <!-- Counter Badge -->
+                            <div class="absolute top-3 right-3 bg-slate-900/90 text-white font-mono text-[11px] font-medium px-2.5 py-1 rounded-md" data-carousel-counter>
+                                1 / 4
+                            </div>
+
+                            <!-- Bottom Dots -->
+                            <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-2" data-carousel-dots></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: Reverse Engineering of a Table Lamp -->
+                <article class="editorial-card rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+                    <!-- Left 5 Cols: Project Details -->
+                    <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200 min-w-0">
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-2.5 py-1 rounded">
+                                    Group Project
+                                </span>
+                                <span class="font-mono text-xs font-medium text-slate-500">
+                                    Jan - May 2026
+                                </span>
+                            </div>
+                            <h3 class="font-display text-2xl font-bold text-slate-900 leading-snug">
+                                Reverse Engineering of a Table Lamp
+                            </h3>
+                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                                Assessed product materials, structure, manufacturing methods, cost-effectiveness, and safety, and proposed material substitutions and design improvements.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-6 border-t border-slate-200/80 flex flex-wrap gap-2">
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">Reverse Engineering</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">SOLIDWORKS</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">2D Technical Drawings</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">Material Analysis</span>
+                        </div>
+                    </div>
+
+                    <!-- Right 7 Cols: Interactive Carousel -->
+                    <div class="lg:col-span-7 stage-grid p-4 sm:p-6 flex items-center justify-center min-w-0">
+                        <div class="carousel relative w-full rounded-xl bg-white border border-slate-200 overflow-hidden shadow-2xs select-none" data-carousel>
+                            <div class="carousel-track flex transition-transform duration-300 ease-out" data-carousel-track>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="Screenshot 2026-11-10 234905.png" alt="Reverse Engineering of a Table Lamp - 3D Model of the Lamp Shade" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="Screenshot 2026-11-10 234853.png" alt="Reverse Engineering of a Table Lamp - Metrology & Measurements" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="Screenshot 2026-11-10 234929.png" alt="Reverse Engineering of a Table Lamp - Exploded Final Assembly" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="Screenshot 2026-11-10 234917.png" alt="Reverse Engineering of a Table Lamp - 2D Engineering Drawing" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                            </div>
+
+                            <!-- Controls -->
+                            <button type="button" data-carousel-prev class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-md flex items-center justify-center transition-all" aria-label="Previous slide">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button type="button" data-carousel-next class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-md flex items-center justify-center transition-all" aria-label="Next slide">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+
+                            <!-- Counter Badge -->
+                            <div class="absolute top-3 right-3 bg-slate-900/90 text-white font-mono text-[11px] font-medium px-2.5 py-1 rounded-md" data-carousel-counter>
+                                1 / 4
+                            </div>
+
+                            <!-- Bottom Dots -->
+                            <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-2" data-carousel-dots></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: Production Flow Efficiency Analysis - Sahan Food (Papadam) Company -->
+                <article class="editorial-card rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+                    <!-- Left 5 Cols: Project Details -->
+                    <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200 min-w-0">
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-2.5 py-1 rounded">
+                                    Ongoing Project
+                                </span>
+                                <span class="font-mono text-xs font-medium text-slate-500">
+                                    July 2026 - Present
+                                </span>
+                            </div>
+                            <h3 class="font-display text-2xl font-bold text-slate-900 leading-snug">
+                                Production Flow Efficiency Analysis - Sahan Food (Papadam) Company
+                            </h3>
+                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                                Analyzing plant operations and production flow to evaluate process efficiency with a proposal to reduce flour wastage in the production process.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-6 border-t border-slate-200/80 flex flex-wrap gap-2">
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">Manufacturing Engineering</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">Process Efficiency</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">Workflow Analysis</span>
+                        </div>
+                    </div>
+
+                    <!-- Right 7 Cols: Interactive Carousel -->
+                    <div class="lg:col-span-7 stage-grid p-4 sm:p-6 flex items-center justify-center min-w-0">
+                        <div class="carousel relative w-full rounded-xl bg-white border border-slate-200 overflow-hidden shadow-2xs select-none" data-carousel>
+                            <div class="carousel-track flex transition-transform duration-300 ease-out" data-carousel-track>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="Screenshot 2026-11-10 235258.png" alt="Production Flow Efficiency Analysis - Project Team" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="WhatsApp Image 2026-11-10 at 11.56.32 PM.jpeg" alt="Production Flow Efficiency Analysis - Factory Production Floor" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="WhatsApp Image 2026-11-10 at 11.59.43 PM.jpeg" alt="Production Flow Efficiency Analysis - Papadam Processing Machinery" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                            </div>
+
+                            <!-- Controls -->
+                            <button type="button" data-carousel-prev class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-md flex items-center justify-center transition-all" aria-label="Previous slide">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button type="button" data-carousel-next class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-md flex items-center justify-center transition-all" aria-label="Next slide">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+
+                            <!-- Counter Badge -->
+                            <div class="absolute top-3 right-3 bg-slate-900/90 text-white font-mono text-[11px] font-medium px-2.5 py-1 rounded-md" data-carousel-counter>
+                                1 / 3
+                            </div>
+
+                            <!-- Bottom Dots -->
+                            <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-2" data-carousel-dots></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4: Mesh Dependence in a Slightly Modified De Laval Nozzle -->
+                <article class="editorial-card rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+                    <!-- Left 5 Cols: Project Details -->
+                    <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200 min-w-0">
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-2.5 py-1 rounded">
+                                    CFD Analysis Project
+                                </span>
+                                <span class="font-mono text-xs font-medium text-slate-500">
+                                    June 2026
+                                </span>
+                            </div>
+                            <h3 class="font-display text-2xl font-bold text-slate-900 leading-snug">
+                                Mesh Dependence in a Slightly Modified De Laval Nozzle
+                            </h3>
+                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                                Analyzing the influence of mesh quality on predicted velocity and pressure behavior in compressible supersonic flow, including how the flow departs from the traditional Bernoulli's assumptions using SOLIDWORKS and ANSYS.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-6 border-t border-slate-200/80 flex flex-wrap gap-2">
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">ANSYS</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">SOLIDWORKS</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">Supersonic Flow</span>
+                            <span class="font-mono text-[11px] font-medium text-slate-700 bg-white border border-slate-200 px-2.5 py-1 rounded">Mesh Dependence</span>
+                        </div>
+                    </div>
+
+                    <!-- Right 7 Cols: Interactive Carousel -->
+                    <div class="lg:col-span-7 stage-grid p-4 sm:p-6 flex items-center justify-center min-w-0">
+                        <div class="carousel relative w-full rounded-xl bg-white border border-slate-200 overflow-hidden shadow-2xs select-none" data-carousel>
+                            <div class="carousel-track flex transition-transform duration-300 ease-out" data-carousel-track>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="1781889990216.jpg" alt="Mesh Dependence in a Slightly Modified De Laval Nozzle - Contours of Turbulent Intensity" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="1781889975692.jpg" alt="Mesh Dependence in a Slightly Modified De Laval Nozzle - Pathlines Colored by Mach Number" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                                <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                    <img src="1781889991245.jpg" alt="Mesh Dependence in a Slightly Modified De Laval Nozzle - Contours of Mach Number" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                                </figure>
+                            </div>
+
+                            <!-- Controls -->
+                            <button type="button" data-carousel-prev class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-md flex items-center justify-center transition-all" aria-label="Previous slide">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button type="button" data-carousel-next class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-md flex items-center justify-center transition-all" aria-label="Next slide">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+
+                            <!-- Counter Badge -->
+                            <div class="absolute top-3 right-3 bg-slate-900/90 text-white font-mono text-[11px] font-medium px-2.5 py-1 rounded-md" data-carousel-counter>
+                                1 / 3
+                            </div>
+
+                            <!-- Bottom Dots -->
+                            <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-2" data-carousel-dots></div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- 4. SECTION 03 — INDUSTRIAL VISIT (High-Contrast Dark Charcoal Feature Block) -->
+        <section id="industrial-visit" class="scroll-mt-24 pt-12 border-t border-slate-200">
+            <div class="dark-stage-grid rounded-2xl overflow-hidden border border-slate-800 text-white grid grid-cols-1 lg:grid-cols-12 items-center">
+                
+                <!-- Left 5 Cols: Description -->
+                <div class="lg:col-span-5 p-6 sm:p-8 md:p-10 space-y-5 min-w-0">
+                    <div class="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-slate-300 bg-slate-800/90 border border-slate-700 px-3 py-1 rounded">
+                        <span>03 / INDUSTRIAL VISIT • FIELD EXPOSURE</span>
+                    </div>
+                    <h2 class="font-display text-2xl sm:text-3xl font-bold text-white leading-snug">
+                        Norochcholai Lakwijaya 3x300MW Power Plant
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Participated in an engineering field visit to Sri Lanka's largest coal-fired thermal power station, observing large-scale 3x300MW steam turbine-generator units, boiler auxiliaries, cooling water systems, and industrial plant operations.
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 flex items-center gap-4 font-mono text-xs text-slate-400">
+                        <span><i class="fa-solid fa-bolt mr-1.5 text-white"></i>900 MW Total Output</span>
+                        <span>•</span>
+                        <span>Thermal Power Generation</span>
+                    </div>
+                </div>
+
+                <!-- Right 7 Cols: Framed Image -->
+                <div class="lg:col-span-7 p-4 sm:p-6 md:p-8">
+                    <div class="rounded-xl overflow-hidden bg-slate-950 border border-slate-800 p-2">
+                        <img src="1771776666242.jpg" alt="Norochcholai Lakwijaya 3x300MW Power Plant Industrial Visit" onclick="openLightbox(this.src, this.alt)" class="zoomable-img w-full max-h-[420px] object-contain rounded-lg mx-auto">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. SECTION 04 — LEADERSHIP & VOLUNTEERING -->
+        <section id="leadership" class="scroll-mt-24 pt-12 border-t border-slate-200 space-y-8">
+            <div>
+                <span class="font-mono text-xs font-semibold uppercase tracking-widest text-slate-500 block mb-2">04 / COMMUNITY &amp; SERVICE</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">Leadership &amp; Volunteering</h2>
+            </div>
+
+            <article class="editorial-card rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+                <!-- Left 5 Cols: Roles -->
+                <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-200 min-w-0">
+                    <div class="space-y-6">
+                        <div>
+                            <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-1">
+                                LEO MULTIPLE DISTRICT 306
+                            </span>
+                            <h3 class="font-display text-2xl font-bold text-slate-900 leading-snug">
+                                Leo Club of Polgasowita | Leo District 306D2, Sri Lanka &amp; Maldives
+                            </h3>
+                        </div>
+
+                        <div class="space-y-3.5">
+                            <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                                    <h4 class="font-display font-bold text-slate-900 text-base">Assistant Treasurer</h4>
+                                    <span class="font-mono text-xs font-medium text-white bg-slate-900 px-2.5 py-0.5 rounded">July - Oct. 2026</span>
+                                </div>
+                                <p class="text-xs text-slate-600">Leo Club of Polgasowita • Leo District 306D2</p>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-xl border border-slate-200">
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                                    <h4 class="font-display font-bold text-slate-900 text-base">Suwa Sathakara Project - Organizer</h4>
+                                    <span class="font-mono text-xs font-medium text-white bg-slate-900 px-2.5 py-0.5 rounded">Sept. 2026</span>
+                                </div>
+                                <p class="text-xs text-slate-600">Leo Club of Polgasowita Community Initiative</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-200/80 font-mono text-xs text-slate-500">
+                        FINANCIAL STEWARDSHIP • PROJECT EXECUTION • TEAM LEADERSHIP
+                    </div>
+                </div>
+
+                <!-- Right 7 Cols: Interactive Carousel -->
+                <div class="lg:col-span-7 stage-grid p-4 sm:p-6 flex items-center justify-center min-w-0">
+                    <div class="carousel relative w-full rounded-xl bg-white border border-slate-200 overflow-hidden shadow-2xs select-none" data-carousel>
+                        <div class="carousel-track flex transition-transform duration-300 ease-out" data-carousel-track>
+                            <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                <img src="WhatsApp Image 2026-11-10 at 11.59.45 PM.jpeg" alt="Leo Club of Polgasowita | Leo District 306D2 Activity 1" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                            </figure>
+                            <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                <img src="WhatsApp Image 2026-09-05 at 8.36.27 PM.jpeg" alt="Leo Club of Polgasowita | Leo District 306D2 Activity 2" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                            </figure>
+                            <figure class="min-w-full h-64 sm:h-80 p-4 pb-12 flex items-center justify-center">
+                                <img src="WhatsApp Image 2026-11-10 at 11.59.42 PM.jpeg" alt="Leo Club of Polgasowita | Leo District 306D2 Activity 3" onclick="openLightbox(this.src, this.alt)" class="zoomable-img max-h-full max-w-full object-contain">
+                            </figure>
+                        </div>
+
+                        <!-- Controls -->
+                        <button type="button" data-carousel-prev class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-md flex items-center justify-center transition-all" aria-label="Previous slide">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button type="button" data-carousel-next class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white shadow-md flex items-center justify-center transition-all" aria-label="Next slide">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+
+                        <!-- Counter Badge -->
+                        <div class="absolute top-3 right-3 bg-slate-900/90 text-white font-mono text-[11px] font-medium px-2.5 py-1 rounded-md" data-carousel-counter>
+                            1 / 3
+                        </div>
+
+                        <!-- Bottom Dots -->
+                        <div class="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-2" data-carousel-dots></div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- 6. SECTION 05 — EDUCATION, SKILLS & CERTIFICATIONS (Structured 2x2 Bento Grid) -->
+        <section id="credentials" class="scroll-mt-24 pt-12 border-t border-slate-200 space-y-8">
+            <div>
+                <span class="font-mono text-xs font-semibold uppercase tracking-widest text-slate-500 block mb-2">05 / ACADEMIC &amp; TECHNICAL DOSSIER</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">Education, Skills &amp; Certifications</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Card 1: Education (Dark Charcoal High-Contrast Card) -->
+                <div class="dark-stage-grid text-white rounded-2xl p-6 sm:p-8 border border-slate-800 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-400">EDUCATION</span>
+                            <span class="font-mono text-xs font-medium text-white bg-slate-800 border border-slate-700 px-3 py-1 rounded">
+                                Mar 2024 - Present
+                            </span>
+                        </div>
+                        <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">
+                            University of Moratuwa
+                        </h3>
+                        <p class="text-slate-200 font-semibold text-base">
+                            BSc Engineering (Hons), Mechanical Engineering
+                        </p>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Undergraduate coursework and hands-on engineering projects focused on mechanical systems design, CAD/CAE simulation, thermo-fluids, and manufacturing engineering.
+                        </p>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-slate-800 flex items-center justify-between font-mono text-xs text-slate-400">
+                        <span>DEPARTMENT OF MECHANICAL ENGINEERING</span>
+                        <span>KATUBEDDA</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Technical & Soft Skills -->
+                <div class="editorial-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div class="space-y-5">
+                        <div>
+                            <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-3">TECHNICAL SKILLS</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-3 py-1.5 rounded-md">SOLIDWORKS</span>
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-3 py-1.5 rounded-md">Solid Edge</span>
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-3 py-1.5 rounded-md">Mechanical Design</span>
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-3 py-1.5 rounded-md">ANSYS</span>
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-3 py-1.5 rounded-md">MATLAB</span>
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-3 py-1.5 rounded-md">Python</span>
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-3 py-1.5 rounded-md">MS Office</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-200">
+                            <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-3">SOFT SKILLS</span>
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <div class="bg-white border border-slate-200 px-3.5 py-2.5 rounded-lg text-sm font-semibold text-slate-800 flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-900"></span> Teamwork
+                                </div>
+                                <div class="bg-white border border-slate-200 px-3.5 py-2.5 rounded-lg text-sm font-semibold text-slate-800 flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-900"></span> Time Management
+                                </div>
+                                <div class="bg-white border border-slate-200 px-3.5 py-2.5 rounded-lg text-sm font-semibold text-slate-800 flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-900"></span> Communication
+                                </div>
+                                <div class="bg-white border border-slate-200 px-3.5 py-2.5 rounded-lg text-sm font-semibold text-slate-800 flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-900"></span> Leadership
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Certifications -->
+                <div class="editorial-card rounded-2xl p-6 sm:p-8">
+                    <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-4">CERTIFICATIONS</span>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-start justify-between gap-4">
+                            <div>
+                                <h4 class="font-display font-bold text-slate-900 text-sm sm:text-base">Simulink Onramp</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">MathWorks</p>
+                            </div>
+                            <span class="font-mono text-xs font-medium text-slate-700 bg-slate-100 px-2.5 py-1 rounded shrink-0">Jul 2026</span>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-start justify-between gap-4">
+                            <div>
+                                <h4 class="font-display font-bold text-slate-900 text-sm sm:text-base">Digital Twins</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">University of Michigan</p>
+                            </div>
+                            <span class="font-mono text-xs font-medium text-slate-700 bg-slate-100 px-2.5 py-1 rounded shrink-0">Mar 2026</span>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-start justify-between gap-4">
+                            <div>
+                                <h4 class="font-display font-bold text-slate-900 text-sm sm:text-base">Python Essentials 1 &amp; 2</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Cisco</p>
+                            </div>
+                            <span class="font-mono text-xs font-medium text-slate-700 bg-slate-100 px-2.5 py-1 rounded shrink-0">Oct 2025 - Feb 2026</span>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-start justify-between gap-4">
+                            <div>
+                                <h4 class="font-display font-bold text-slate-900 text-sm sm:text-base">Intro. to Model-Based Systems Engineering</h4>
+                                <p class="text-xs text-slate-500 mt-0.5">Siemens</p>
+                            </div>
+                            <span class="font-mono text-xs font-medium text-slate-700 bg-slate-100 px-2.5 py-1 rounded shrink-0">Jan 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Languages -->
+                <div class="editorial-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-4">LANGUAGES</span>
+                        <div class="space-y-3">
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-center justify-between gap-4">
+                                <div>
+                                    <h4 class="font-display font-bold text-slate-900 text-base">English</h4>
+                                    <p class="text-xs text-slate-600 mt-0.5">Fluent (Full Professional Proficiency)</p>
+                                </div>
+                                <span class="font-mono text-xs font-semibold text-white bg-slate-900 px-2.5 py-1 rounded shrink-0">Fluent</span>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-center justify-between gap-4">
+                                <div>
+                                    <h4 class="font-display font-bold text-slate-900 text-base">Tamil</h4>
+                                    <p class="text-xs text-slate-600 mt-0.5">Elementary Proficiency</p>
+                                </div>
+                                <span class="font-mono text-xs font-medium text-slate-700 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded shrink-0">Elementary</span>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-center justify-between gap-4">
+                                <div>
+                                    <h4 class="font-display font-bold text-slate-900 text-base">German</h4>
+                                    <p class="text-xs text-slate-600 mt-0.5">Developing (In Progress)</p>
+                                </div>
+                                <span class="font-mono text-xs font-medium text-slate-700 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded shrink-0">In Progress</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-200/80 flex items-center justify-between font-mono text-xs text-slate-500">
+                        <span>AVAILABLE FOR INDUSTRIAL PLACEMENT</span>
+                        <span class="text-slate-900 font-semibold">SRI LANKA</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 bg-surface py-10 mt-12">
+        <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+            <div class="flex items-center gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-slate-900"></span>
+                <span class="font-semibold text-slate-900">AVISHKA HERATH</span>
+                <span>• MECHANICAL ENGINEERING PORTFOLIO</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-5">
+                <a href="mailto:avishka.madhuwantha25@gmail.com" class="hover:text-slate-900 transition-colors">Email</a>
+                <a href="https://www.linkedin.com/in/avishka-herath-6a85b7386/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 transition-colors">LinkedIn</a>
+                <a href="CV.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 transition-colors">CV.pdf</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FULL-SCREEN IMAGE LIGHTBOX MODAL -->
+    <div id="lightbox" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8" onclick="closeLightbox()">
+        <div class="relative max-w-5xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
+            <button type="button" onclick="closeLightbox()" class="mb-3 self-end text-white hover:text-slate-300 font-mono text-xs font-medium flex items-center gap-2 bg-slate-900 px-3.5 py-2 rounded-lg border border-slate-700">
+                <i class="fa-solid fa-xmark"></i> CLOSE [ESC]
+            </button>
+            <div class="bg-white p-3 sm:p-5 rounded-2xl shadow-2xl max-h-[80vh] w-full flex items-center justify-center overflow-hidden">
+                <img id="lightbox-img" src="" alt="" class="max-h-[74vh] max-w-full object-contain rounded">
+            </div>
+            <p id="lightbox-caption" class="font-mono text-slate-200 text-xs sm:text-sm mt-3 text-center"></p>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenuIcon.className = 'fa-solid fa-xmark text-lg';
+            } else {
+                mobileMenu.classList.add('hidden');
+                mobileMenuIcon.className = 'fa-solid fa-bars text-base';
+            }
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                mobileMenuIcon.className = 'fa-solid fa-bars text-base';
+            });
+        });
+
+        // Lightbox Modal Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        function openLightbox(src, alt) {
+            lightboxImg.src = src;
+            lightboxImg.alt = alt || '';
+            lightboxCaption.textContent = alt || '';
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('hidden');
+            lightboxImg.src = '';
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                closeLightbox();
+            }
+        });
+
+        // Interactive Carousels Initialization
+        document.querySelectorAll('[data-carousel]').forEach(function(carousel) {
+            const track = carousel.querySelector('[data-carousel-track]');
+            const slides = Array.from(track.children);
+            const prevBtn = carousel.querySelector('[data-carousel-prev]');
+            const nextBtn = carousel.querySelector('[data-carousel-next]');
+            const dotsContainer = carousel.querySelector('[data-carousel-dots]');
+            const counter = carousel.querySelector('[data-carousel-counter]');
+            
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+
+            slides.forEach(function(_, idx) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
+                dot.className = idx === 0 
+                    ? 'w-6 h-2 rounded-full bg-slate-900 transition-all duration-200' 
+                    : 'w-2 h-2 rounded-full bg-slate-300 hover:bg-slate-400 transition-all duration-200';
+                dot.addEventListener('click', function() {
+                    goToSlide(idx);
+                });
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = Array.from(dotsContainer.children);
+
+            function updateCarousel() {
+                track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+                if (counter) {
+                    counter.textContent = (currentIndex + 1) + ' / ' + totalSlides;
+                }
+                dots.forEach(function(dot, idx) {
+                    dot.className = idx === currentIndex
+                        ? 'w-6 h-2 rounded-full bg-slate-900 transition-all duration-200'
+                        : 'w-2 h-2 rounded-full bg-slate-300 hover:bg-slate-400 transition-all duration-200';
+                });
+            }
+
+            function goToSlide(index) {
+                currentIndex = (index + totalSlides) % totalSlides;
+                updateCarousel();
+            }
+
+            prevBtn.addEventListener('click', function() {
+                goToSlide(currentIndex - 1);
+            });
+
+            nextBtn.addEventListener('click', function() {
+                goToSlide(currentIndex + 1);
+            });
+
+            // Mobile Touch Swipe Support
+            let startX = 0;
+            let isSwiping = false;
+
+            track.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+                isSwiping = true;
+            }, { passive: true });
+
+            track.addEventListener('touchend', function(e) {
+                if (!isSwiping) return;
+                const endX = e.changedTouches[0].clientX;
+                const diffX = startX - endX;
+                if (Math.abs(diffX) > 40) {
+                    if (diffX > 0) {
+                        goToSlide(currentIndex + 1);
+                    } else {
+                        goToSlide(currentIndex - 1);
+                    }
+                }
+                isSwiping = false;
+            }, { passive: true });
+        });
+    </script>
+</body>
+</html>
